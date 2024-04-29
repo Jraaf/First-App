@@ -12,9 +12,9 @@ public interface IRepo<TEntity, in TKEy>
 {
     Task<List<TEntity>> GetAllAsync();
     Task<TEntity?> GetAsync(int id);
-    Task<bool> AddAsync(TEntity entity);
+    Task<TEntity> AddAsync(TEntity entity);
     Task<bool> AddManyAsync(IEnumerable<TEntity> entities);
-    Task<bool> UpdateAsync(TEntity entity);
+    Task<TEntity> UpdateAsync(TEntity entity);
     Task<bool> UpdateManyAsync(IEnumerable<TEntity> entities);
     Task<bool> DeleteAsync(TEntity entity);
     Task<bool> DeleteManyAsync(IEnumerable<TEntity> entities);

@@ -16,10 +16,10 @@ public class ListBoardService : IListBoardService
         _repo = repo;
         _mapper = mapper;
     }
-    public async Task<bool> CreateAsync(CreateListBoardDTO listBoardDTO)
+    public async Task<CreateListBoardDTO> CreateAsync(CreateListBoardDTO listBoardDTO)
     {
         var data = _mapper.Map<ListBoard>(listBoardDTO);
-        return await _repo.AddAsync(data);
+        return _mapper.Map<CreateListBoardDTO>(await _repo.AddAsync(data));
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -44,13 +44,13 @@ public class ListBoardService : IListBoardService
         return _mapper.Map<ListBoardDTO>(data);
     }
 
-    public async Task<bool> UpdateAsync(CreateListBoardDTO listBoardDTO, int Id)
+    public async Task<CreateListBoardDTO> UpdateAsync(CreateListBoardDTO listBoardDTO, int Id)
     {
         var data = await _repo.GetAsync(Id)
                 ?? throw new NotFoundException(Id);
 
         _mapper.Map(listBoardDTO, data);
 
-        return await _repo.UpdateAsync(data);
+        return _mapper.Map<CreateListBoardDTO>(await _repo.UpdateAsync(data));
     }
 }

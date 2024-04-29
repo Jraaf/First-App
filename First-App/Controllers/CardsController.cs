@@ -29,14 +29,21 @@ public class CardsController : ControllerBase
         }
     }
     [HttpGet]
-    public async Task<List<CardDTO>> GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return await _service.GetAllAsync();
+        return Ok(await _service.GetAllAsync());
     }
     [HttpPost]
-    public async Task<bool> Post(CreateCardDTO obj)
+    public async Task<IActionResult> Post(CreateCardDTO obj)
     {
-        return await _service.CreateAsync(obj);
+        try
+        {
+            return Ok(await _service.CreateAsync(obj));
+        }
+        catch (Exception)
+        {
+            return BadRequest();
+        }
     }
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
@@ -50,9 +57,21 @@ public class CardsController : ControllerBase
             return NotFound(e.Message);
         }
     }
-    [HttpPut]
-    public async Task<bool> Update(CreateCardDTO obj, int id)
+    [HttpPatch]
+    public async Task<IActionResult> Update(CreateCardDTO obj, int id)
     {
-        return await _service.UpdateAsync(obj, id);
+        try
+        {
+            return Ok(await _service.UpdateAsync(obj, id));
+
+        }
+        catch (NotFoundException)
+        {
+            return NotFound();
+        }
+        catch (Exception)
+        {
+            return BadRequest();
+        }
     }
 }

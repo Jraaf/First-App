@@ -16,10 +16,10 @@ public class CardService : ICardService
         _repo = repo;
         _mapper = mapper;
     }
-    public async Task<bool> CreateAsync(CreateCardDTO cardDTO)
+    public async Task<CardDTO> CreateAsync(CreateCardDTO cardDTO)
     {
         var data = _mapper.Map<Card>(cardDTO);
-        return await _repo.AddAsync(data);
+        return _mapper.Map<CardDTO>(await _repo.AddAsync(data));
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -44,13 +44,13 @@ public class CardService : ICardService
         return _mapper.Map<CardDTO>(data);
     }
 
-    public async Task<bool> UpdateAsync(CreateCardDTO cardDTO, int Id)
+    public async Task<CardDTO> UpdateAsync(CreateCardDTO cardDTO, int Id)
     {
         var data = await _repo.GetAsync(Id)
                 ?? throw new NotFoundException(Id);
 
-        _mapper.Map(cardDTO, data);
+        var card=_mapper.Map(cardDTO, data);
 
-        return await _repo.UpdateAsync(data);
+        return _mapper.Map<CardDTO>(await _repo.UpdateAsync(card));
     }
 }

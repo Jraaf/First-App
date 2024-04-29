@@ -11,7 +11,7 @@ public interface ICardService
 {
     Task<List<CardDTO>> GetAllAsync();
     Task<CardDTO> GetByIdAsync(int id);
-    Task<bool> CreateAsync(CreateCardDTO cardDTO);
+    Task<CardDTO> CreateAsync(CreateCardDTO cardDTO);
     Task<bool> DeleteAsync(int id);
-    Task<bool> UpdateAsync(CreateCardDTO cardDTO, int Id);
+    Task<CardDTO> UpdateAsync(CreateCardDTO cardDTO, int Id);
 }

@@ -25,10 +25,11 @@ public class Repo<TEntity, TKey> : IRepo<TEntity, TKey>
 
     public IQueryProvider Provider => ((IQueryable<TEntity>)_table).Provider;
 
-    public async Task<bool> AddAsync(TEntity entity)
+    public async Task<TEntity> AddAsync(TEntity entity)
     {
-        await _table.AddAsync(entity);
-        return SaveChanges() > 0;
+        var data = await _table.AddAsync(entity);
+        await SaveChangesAsync();
+        return data.Entity;
     }
 
     public async Task<TEntity?> FindAsync(TKey key)
@@ -84,11 +85,11 @@ public class Repo<TEntity, TKey> : IRepo<TEntity, TKey>
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> UpdateAsync(TEntity entity)
+    public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-
-        _table.Update(entity);
-        return await _context.SaveChangesAsync() > 0;
+        var data=_table.Update(entity);
+        await _context.SaveChangesAsync();
+        return data.Entity;
     }
 
     public async Task<bool> UpdateManyAsync(IEnumerable<TEntity> entities)
