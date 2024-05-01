@@ -1,0 +1,27 @@
+//global styles and change variables values
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+$grey: #797979;
+$light-gray:#c5c5c5;
+
+$white:rgb(255,255,255);
+$black:rgb(0,0,0);
+$red:rgb(187, 55, 55);
+$bluish:rgb(82, 86, 104);
+
+//variables
+$familyy-sans-serif:"Inter",sans-serif;
+$primary:$white;
+
+$link: $white;
+
+
+$control-border-width:2px;
+$input-border-color: transparent;
+$input-shadow:none;
+
+//custom global styles
+
+html,body{
+    height:100%;
+}
