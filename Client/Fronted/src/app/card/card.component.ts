@@ -18,7 +18,7 @@ import { CardService } from '../card-service';
 export class CardComponent implements OnInit{
   cards: Card[] = [];
 
-  
+
   constructor(private cardService: CardService) {}
 
   ngOnInit() {
@@ -26,10 +26,11 @@ export class CardComponent implements OnInit{
   }
 
   fetchCards() {
-    console.log("hui");
+    
     this.cardService.getAllCards().subscribe({
       next: (cards) => {
         this.cards = cards;
+        console.log(this.cards)
       },
       error: (err) => {
         console.error('Error fetching cards:', err);

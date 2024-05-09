@@ -21,9 +21,11 @@ export class CardService {
 
   // Fetch all cards
   getAllCards(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.apiUrl).pipe(
+    let data=this.http.get<Card[]>(this.apiUrl).pipe(
       map(cards => cards.map(card => this.mapCard(card)))
     );
+    console.log(data)
+    return data;
   }
 
   // Map JSON response to Card interface
