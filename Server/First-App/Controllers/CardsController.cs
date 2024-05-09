@@ -1,6 +1,7 @@
 ﻿using First_App.Common.DTO;
 using Fisrt_App.BLL.Exceptions;
 using Fisrt_App.BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,8 @@ namespace First_App.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[EnableCors("AllowSpecificOrigins")]
+
 public class CardsController : ControllerBase
 {
     private readonly ICardService _service;

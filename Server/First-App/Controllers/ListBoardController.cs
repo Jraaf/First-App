@@ -1,16 +1,18 @@
 ﻿using First_App.Common.DTO;
 using Fisrt_App.BLL.Exceptions;
 using Fisrt_App.BLL.Services.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace First_App.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[EnableCors("AllowSpecificOrigins")]
 public class ListBoardController : ControllerBase
 {
-    private readonly ICardService _service;
-    public ListBoardController(ICardService service)
+    private readonly IListBoardService _service;
+    public ListBoardController(IListBoardService service)
     {
         _service = service;
     }
@@ -32,7 +34,7 @@ public class ListBoardController : ControllerBase
         return Ok(await _service.GetAllAsync());
     }
     [HttpPost]
-    public async Task<IActionResult> Post(CreateCardDTO obj)
+    public async Task<IActionResult> Post(CreateListBoardDTO obj)
     {
         try
         {
@@ -56,7 +58,7 @@ public class ListBoardController : ControllerBase
         }
     }
     [HttpPatch]
-    public async Task<IActionResult> Update(CreateCardDTO obj, int id)
+    public async Task<IActionResult> Update(CreateListBoardDTO obj, int id)
     {
         try
         {
