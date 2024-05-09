@@ -10,6 +10,6 @@ namespace Fisrt_App.DAL.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; } = "Title";
-        public List<Card>? Cards{ get; set; }
+        public List<Card> Cards{ get; set; }
     }
 }
