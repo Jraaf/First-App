@@ -1,8 +1,11 @@
 ﻿using Fisrt_App.DAL.Entities;
+using Fisrt_App.DAL.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,34 +21,87 @@ namespace Fisrt_App.DAL
         }
         public DbSet<Card> Cards { get; set; }
         public DbSet<ListBoard> ListBoards { get; set; }
+        public DbSet<Board> Boards { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ListBoard>().HasData(
-                new ListBoard
-                {
-                    Id = 1,
-                    Title = "MyBoard1",
+            //modelBuilder.Entity<Board>().HasData(
+            //    new Board
+            //    {
+            //        Id = 1,
+            //        Title = "MyBoard1"
+            //    },
+            //    new Board
+            //    {
+            //        Id = 2,
+            //        Title = "MyBoard2"
+            //    });
+            //modelBuilder.Entity<ListBoard>().HasData(
+            //    CreateListBoards(2, 2)
+            //);
+            //modelBuilder.Entity<Card>().HasData(
+            //   CreateCards(10, 2)
+            //);
 
-                },
-                new ListBoard
-                {
-                    Id = 2,
-                    Title = "MyBoard2",
+            modelBuilder.Entity<Card>().ToTable("Cards");
+            modelBuilder.Entity<ListBoard>().ToTable("ListBoards");
+            modelBuilder.Entity<Board>().ToTable("Boards");
 
-                });
-            modelBuilder.Entity<Card>().HasData(
-                new Card { Id= 1,Title = "MyCard1", Description = "MyDescription1",ListBoardId= 1},
-                new Card { Id= 4,Title = "MyCard2", Description = "MyDescription2",ListBoardId= 1},
-                new Card { Id= 5,Title = "MyCard3", Description = "MyDescription3",ListBoardId= 1},
-                new Card { Id= 6,Title = "MyCard4", Description = "MyDescription4",ListBoardId= 1},
-                new Card { Id= 7,Title = "MyCard5", Description = "MyDescription5",ListBoardId= 1},
-                new Card { Id= 8,Title = "MyCard6", Description = "MyDescription6",ListBoardId= 2},
-                new Card { Id= 9,Title = "MyCard7", Description = "MyDescription7",ListBoardId= 2},
-                new Card { Id= 10,Title = "MyCard8", Description = "MyDescription8",ListBoardId= 2},
-                new Card { Id= 11,Title = "MyCard9", Description = "MyDescription9",ListBoardId= 2},
-                new Card { Id= 12,Title = "MyCard10", Description = "MyDescription10",ListBoardId= 2}
-            );
+            modelBuilder.Entity<Card>()
+                .HasOne(c => c.ListBoard)
+                .WithMany(b => b.Cards)
+                .HasForeignKey(c => c.ListBoardId);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="number">number of cards per each ListBoard</param>
+        /// <param name="listBoardsNumber"></param>
+        /// <returns></returns>
+        private List<Card> CreateCards(int number, int listBoardsNumber)
+        {
+            var cards = new List<Card>();
+            int id = 0;
+            for (int i = 1; i <= listBoardsNumber; i++)
+            {
+                for (int j = 1; j <= number; j++)
+                {
+                    id++;
+                    cards.Add(new Card
+                    {
+                        Id = id,
+                        Title = "MyCard" + id.ToString(),
+                        Description = "MyDescription" + id.ToString(),
+                        ListBoardId = i,
+                        BoardId = j,
+                    });
+                }
+            }
+            return cards;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="number">number of ListBoards per each Board</param>
+        /// <param name="numberBoards"></param>
+        /// <returns>List<ListBoard> to populate database</returns>
+        private List<ListBoard> CreateListBoards(int number, int numberBoards)
+        {
+            var listBoards = new List<ListBoard>();
+            int id = 0;
+            for (int i = 1; i <= numberBoards; i++)
+            {
+                for (int j = 1; j <= number; j++)
+                {
+                    id++;
+                    listBoards.Add(new ListBoard
+                    {
+                        Id = id,
+                        Title = "MyTitle" + id.ToString(),
+                        BoardId = i,
+                    });
+                }
+            }
+            return listBoards;
+        }
     }
 }
