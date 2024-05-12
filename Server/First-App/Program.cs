@@ -25,10 +25,14 @@ builder.Services.AddAutoMapper(typeof(CardProfile));
 //Repositories
 builder.Services.AddScoped<ICardRepository,CardRepository>();
 builder.Services.AddScoped<IListBoardRepository, ListBoardRepository>();
+builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+
 
 //Services
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IListBoardService, ListBoardService>();
+builder.Services.AddScoped<IBoardService, BoardService>();
+
 
 builder.Services.AddCors(options =>
 {
