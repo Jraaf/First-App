@@ -31,6 +31,19 @@ public class CardsController : ControllerBase
             return NotFound(e.Message);
         }
     }
+    [HttpGet("/list={listId}")]
+    public async Task<IActionResult> GetManyByListBoardId(int listId)
+    {
+        try 
+        {
+            var data = await _service.GetManyByListBoardId(listId);
+            return Ok(data);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+    }
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {

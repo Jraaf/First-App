@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using First_App.Common.DTO;
 using Fisrt_App.BLL.Exceptions;
-using Fisrt_App.BLL.Services.Base;
 using Fisrt_App.BLL.Services.Interfaces;
 using Fisrt_App.DAL.Entities;
 using Fisrt_App.DAL.Repository.Interfaces;
@@ -14,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Fisrt_App.BLL.Services;
 
-public class BoardService :  IBoardService
+public class BoardService : IBoardService
 {
     private readonly IBoardRepository _repo;
     private readonly IMapper _mapper;

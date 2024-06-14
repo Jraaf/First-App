@@ -71,8 +71,7 @@ namespace Fisrt_App.DAL
                         Id = id,
                         Title = "MyCard" + id.ToString(),
                         Description = "MyDescription" + id.ToString(),
-                        ListBoardId = i,
-                        BoardId = j,
+                        ListBoardId = i
                     });
                 }
             }

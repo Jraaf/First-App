@@ -9,4 +9,5 @@ namespace First_App.Common.DTO;
 public class CreateListBoardDTO
 {
     public string Title { get; set; } = "Title";
+    public int BoardId { get; set; }
 }

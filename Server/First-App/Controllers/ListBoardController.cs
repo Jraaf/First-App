@@ -3,6 +3,7 @@ using Fisrt_App.BLL.Exceptions;
 using Fisrt_App.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace First_App.Controllers;
 
@@ -23,7 +24,20 @@ public class ListBoardController : ControllerBase
         {
             return Ok(await _service.GetByIdAsync(id));
         }
-        catch (Exception e)
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+    [HttpGet("/board={boardId}")]
+    public async Task<IActionResult> GetManyByBoardId(int boardId)
+    {
+        try
+        {
+            var data = await _service.GetManyByBoardId(boardId);
+            return Ok(data);
+        }
+        catch (NotFoundException e)
         {
             return NotFound(e.Message);
         }
@@ -40,9 +54,9 @@ public class ListBoardController : ControllerBase
         {
             return Ok(await _service.CreateAsync(obj));
         }
-        catch (Exception)
+        catch(Exception e)
         {
-            return BadRequest();
+            return BadRequest(e.Message);
         }
     }
     [HttpDelete("{id}")]

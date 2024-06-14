@@ -19,16 +19,13 @@ namespace Fisrt_App.DAL.Repository
         {
             _context = context;
         }
-        public new async Task<ListBoard?> FindAsync(int key)
+        public async Task<List<ListBoard>> GetManyByBoardId(int Id)
         {
-            var Cards = await _context.Cards.ToListAsync();
-            var listCards=(from Card in Cards
-                     where Card.ListBoardId == key
-                     select Card).ToList();
-            var listBoard = await _context.ListBoards.FindAsync(key);
-            listBoard.Cards = listCards;
-            await _context.SaveChangesAsync();
-            return listBoard;
+            var lists= await _context.ListBoards.ToListAsync();
+            var res = (from l in lists
+                       where l.BoardId == Id
+                       select l).ToList();
+            return res;
         }
     }
 }

@@ -16,10 +16,10 @@ public class ListBoardService : IListBoardService
         _repo = repo;
         _mapper = mapper;
     }
-    public async Task<CreateListBoardDTO> CreateAsync(CreateListBoardDTO listBoardDTO)
+    public async Task<ListBoardDTO> CreateAsync(CreateListBoardDTO listBoardDTO)
     {
         var data = _mapper.Map<ListBoard>(listBoardDTO);
-        return _mapper.Map<CreateListBoardDTO>(await _repo.AddAsync(data));
+        return _mapper.Map<ListBoardDTO>(await _repo.AddAsync(data));
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -44,13 +44,22 @@ public class ListBoardService : IListBoardService
         return _mapper.Map<ListBoardDTO>(data);
     }
 
-    public async Task<CreateListBoardDTO> UpdateAsync(CreateListBoardDTO listBoardDTO, int Id)
+    public async Task<List<ListBoardDTO>> GetManyByBoardId(int Id)
+    {
+        var data = await _repo.GetManyByBoardId(Id);
+        if (data.Count > 0)
+            return _mapper.Map<List<ListBoardDTO>>(data);
+        else
+            throw new NotFoundException($"No lists what are in board {Id}");
+    }
+
+    public async Task<ListBoardDTO> UpdateAsync(CreateListBoardDTO listBoardDTO, int Id)
     {
         var data = await _repo.GetAsync(Id)
                 ?? throw new NotFoundException(Id);
 
         _mapper.Map(listBoardDTO, data);
 
-        return _mapper.Map<CreateListBoardDTO>(await _repo.UpdateAsync(data));
+        return _mapper.Map<ListBoardDTO>(await _repo.UpdateAsync(data));
     }
 }

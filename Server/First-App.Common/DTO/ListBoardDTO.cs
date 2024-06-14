@@ -13,5 +13,6 @@ public class ListBoardDTO
 {
     public int Id { get; set; }
     public string Title { get; set; }
+    public int BoardId { get; set; }
     public List<CardDTO>? Cards { get; set; }
 }

@@ -44,6 +44,15 @@ public class CardService : ICardService
         return _mapper.Map<CardDTO>(data);
     }
 
+    public async Task<List<CardDTO>> GetManyByListBoardId(int Id)
+    {
+        var data = await _repo.GetManyByListBoardId(Id);
+        if (data.Count > 0)
+            return _mapper.Map<List<CardDTO>>(data);
+        else
+            throw new NotFoundException($"No cards what are in list {Id}");
+    }
+
     public async Task<CardDTO> UpdateAsync(CreateCardDTO cardDTO, int Id)
     {
         var data = await _repo.GetAsync(Id)

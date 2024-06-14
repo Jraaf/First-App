@@ -1,4 +1,5 @@
 ﻿using First_App.Common.DTO;
+using Fisrt_App.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,4 +15,5 @@ public interface ICardService
     Task<CardDTO> CreateAsync(CreateCardDTO cardDTO);
     Task<bool> DeleteAsync(int id);
     Task<CardDTO> UpdateAsync(CreateCardDTO cardDTO, int Id);
+    Task<List<CardDTO>> GetManyByListBoardId(int Id);
 }

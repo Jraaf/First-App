@@ -11,7 +11,8 @@ public interface IListBoardService
 {
     Task<List<ListBoardDTO>> GetAllAsync();
     Task<ListBoardDTO> GetByIdAsync(int id);
-    Task<CreateListBoardDTO> CreateAsync(CreateListBoardDTO listBoardDTO);
+    Task<ListBoardDTO> CreateAsync(CreateListBoardDTO listBoardDTO);
     Task<bool> DeleteAsync(int id);
-    Task<CreateListBoardDTO> UpdateAsync(CreateListBoardDTO listBoardDTO, int Id);
+    Task<ListBoardDTO> UpdateAsync(CreateListBoardDTO listBoardDTO, int Id);
+    Task<List<ListBoardDTO>> GetManyByBoardId(int Id);
 }

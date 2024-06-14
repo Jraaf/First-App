@@ -10,5 +10,6 @@ namespace Fisrt_App.DAL.Repository.Interfaces
 {
     public interface ICardRepository:IRepo<Card,int>
     {
+        Task<List<Card>> GetManyByListBoardId(int Id);
     }
 }
