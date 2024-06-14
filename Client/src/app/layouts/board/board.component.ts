@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Board} from "../../interfaces/Board";
 
 @Component({
   selector: 'app-board',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-
+  @Input() board!: Board;
 }

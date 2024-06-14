@@ -13,10 +13,7 @@ export class BoardService {
     private apiService: ApiService
   ) { }
 
-  getAll = (url: string,params:PaginationParams): Observable<Board[]> => {
-    return this.apiService.getAll(url, {
-      params,
-      responseType: "json"
-    });
+  getAll = (url: string): Observable<Board[]> => {
+    return this.apiService.getAll(url);
   }
 }
