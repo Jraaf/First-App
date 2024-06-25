@@ -5,5 +5,4 @@ public class Board
     public int Id { get; set; }
     public string Title { get; set; }
     public List<ListBoard>? ListBoards { get; set; }
-    public List<Card>? Cards { get; set; }
 }
