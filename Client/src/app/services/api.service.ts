@@ -12,7 +12,7 @@ export class ApiService {
     private httpClient: HttpClient,
   ) { }
 
-  getAll<T>(url: string): Observable<T> {
+  get<T>(url: string): Observable<T> {
     return this.httpClient.get(url,{}) as Observable<T>;
   }
 }

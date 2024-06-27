@@ -14,6 +14,6 @@ export class BoardService {
   ) { }
 
   getAll = (url: string): Observable<Board[]> => {
-    return this.apiService.getAll(url);
+    return this.apiService.get(url);
   }
 }
