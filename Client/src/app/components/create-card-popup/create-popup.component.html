@@ -1,0 +1,12 @@
+<p-dialog header = "Create card" [(visible)] = "display" [modal]="true" [closable] = "false">
+
+  <span>Title:</span>
+  <input type = "text" [(ngModel)]="card.title">
+
+  <span>Descriprion:</span>
+  <input type = "text" [(ngModel)]="card.description">
+  <p-footer>
+    <button type="button" pButton icon = "pi pi-check" (click)="onCreate()" label = "Create"></button>
+    <button type="button" pButton icon = "pi pi-times" (click)="onCancel()" label = "Cancel"></button>
+  </p-footer>
+</p-dialog>
