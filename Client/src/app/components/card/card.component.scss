@@ -1,0 +1,21 @@
+.card {
+  width: 300px; // Static width
+  height: 225px; // Height based on 4:3 ratio
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 10px; // Slightly rounded corners
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: white;
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 10px; // Space between title and description
+  }
+
+  .description {
+    font-weight: 600; // Semibold
+    color: gray;
+  }
+}

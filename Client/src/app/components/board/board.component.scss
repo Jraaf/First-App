@@ -1,0 +1,16 @@
+.board {
+  overflow-x: auto; // Enables horizontal scrolling
+  white-space: nowrap; // Keeps lists on the same horizontal line
+  padding: 20px;
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 20px; // Space between title and lists
+  }
+
+  .list-wrapper {
+    display: inline-block;
+    vertical-align: top; // Aligns lists at the top
+    margin-right: 20px; // Space between each list
+  }
+}

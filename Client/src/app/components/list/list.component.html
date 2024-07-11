@@ -1,2 +1,4 @@
-<p> list {{listBoard.title}}</p>
-<app-card *ngFor="let card of cards" [card]="card"></app-card>
+<div class="list">
+  <div class="title">{{ listBoard.title }}</div>
+  <app-card *ngFor="let card of cards" [card]="card"></app-card>
+</div>

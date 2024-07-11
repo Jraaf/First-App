@@ -1,0 +1,10 @@
+.list {
+  width: 350px; // Static width, wider than individual cards
+  overflow-y: auto; // Enables vertical scrolling
+  padding: 10px;
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 20px; // Space between title and card content
+  }
+}

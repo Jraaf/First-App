@@ -1,2 +1,6 @@
-<p>{{board.title}}</p>
-<app-list *ngFor="let listBoard of listBoards" [listBoard] = "listBoard"></app-list>
+<div class="board">
+  <div class="title">{{ board.title }}</div>
+  <div class="list-wrapper" *ngFor="let list of listBoards">
+    <app-list [listBoard]="list"></app-list>
+  </div>
+</div>

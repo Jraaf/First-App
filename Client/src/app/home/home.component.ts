@@ -20,10 +20,46 @@ export class HomeComponent {
   boards:Board[]=[];
 
   ngOnInit(){
-    this.service.getAll('https://localhost:7082/api/Board')
+    this.fetchAll();
+  }
+  fetchAll(){
+    this.service.get('https://localhost:7082/api/Board')
       .subscribe((boards:Board[])=>{
         this.boards = boards;
         console.log(this.boards);
-    });
+      });
+  }
+  edit(board:Board,id:number){
+    this.service.edit(`https://localhost:7082/api/Board?id=${id}`,board).subscribe(
+      {
+        next:(data)=>{
+          console.log(data);
+          this.fetchAll();
+        },
+        error:(err)=>console.log(err)
+      }
+    );
+  }
+  delete(id:number){
+    this.service.delete(`https://localhost:7082/api/Board/${id}`).subscribe(
+      {
+        next:(data)=>{
+          console.log(data);
+          this.fetchAll();
+        },
+        error:(err)=>console.log(err)
+      }
+    );
+  }
+  add(board:Board){
+    this.service.add(`https://localhost:7082/api/Board`,board).subscribe(
+      {
+        next:(data)=>{
+          console.log(data);
+          this.fetchAll();
+        },
+        error:(err)=>console.log(err)
+      }
+    );
   }
 }
